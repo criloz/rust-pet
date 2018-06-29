@@ -4,7 +4,7 @@ filter them by their done status
 
 ## task model
 
-| Column        | Typ                   | description  |
+| Column        | Type                  | Description  |
 | ------------- |:--------------------: | -----:|
 | name          | string                | Name of the task, it also can be use as description |
 | created_at    | datetime              | time when the task is created  |
