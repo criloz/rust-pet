@@ -1,0 +1,24 @@
+[package]
+name = "pet"
+version = "0.1.0"
+authors = ["Cristian Lozano <criloz@nebtex.com>"]
+
+[dependencies]
+protobuf        = "2"
+futures         = "0.1.*"
+futures-cpupool = "0.1.*"
+tls-api            = "0.1.*"
+tls-api-native-tls = "0.1.*"
+httpbis         = "~0.7"
+env_logger      = "0.4.*"
+grpc = "0.5.0"
+diesel = { version = "1.0.0", features = ["postgres", "chrono"] }
+dotenv = "0.9.0"
+chrono = "0.4"
+
+[build-dependencies]
+protoc-rust-grpc = "0.5.0"
+
+[[bin]]
+name = "server"
+path = "src/server.rs"

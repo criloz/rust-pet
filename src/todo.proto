@@ -1,0 +1,83 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+// The request message containing the user's name.
+message Task {
+    // unique identifier of the task
+    int32 id = 1;
+    // task name
+    string name = 2;
+    // time when the task was created
+    google.protobuf.Timestamp created_at = 3;
+    // time when the task was completed
+    google.protobuf.Timestamp done_at = 4;
+    // when true is means that the task is completed
+    bool done = 5;
+}
+
+// crud for resources of type task
+service TaskManager {
+    rpc Create (TaskManagerCreateRequest) returns (TaskManagerCreateResponse) {
+    }
+    rpc Update (TaskManagerUpdateRequest) returns (TaskManagerUpdateResponse) {
+    }
+    rpc Delete (TaskManagerDeleteRequest) returns (TaskManagerDeleteResponse) {
+    }
+    rpc List (TaskManagerListRequest) returns (TaskManagerListResponse) {
+    }
+
+}
+
+message Error {
+    string message = 1;
+}
+
+message TaskManagerCreateRequest {
+    Task todo = 1;
+}
+
+message TaskManagerCreateResponse {
+    Error error = 1;
+    Task todo = 2;
+}
+
+message TaskManagerDeleteRequest {
+    int32 id = 1;
+}
+
+message TaskManagerDeleteResponse {
+    Error error = 1;
+}
+
+message TaskManagerUpdateRequest {
+    int32 id = 1;
+
+    oneof optional_done {
+        bool done = 2;
+    }
+    oneof optional_name {
+        string name = 3;
+    }
+}
+
+message TaskManagerUpdateResponse {
+    Error error = 1;
+    Task todo = 2;
+}
+
+enum ListOptionKind {
+    ALL = 0;
+    DONE = 1;
+    NOT_DONE = 2;
+}
+
+message TaskManagerListRequest {
+    ListOptionKind option = 1;
+}
+
+message TaskManagerListResponse {
+    Error error = 1;
+    repeated Task todo = 2;
+
+}
